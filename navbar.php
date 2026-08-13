@@ -159,13 +159,17 @@ Costumer service
 <input
         class="form-control me-2"
         type="search"
-        name="search"
+        name="search" id="text"
         placeholder="Search Mobiles"
         value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <button class="btn" type="button" onclick="startListening()">
+    <i class="bi bi-mic"></i>
+</button>
 
     <button class="btn btn-search" type="submit">
         <i class="bi bi-search"></i>
     </button>
+  
 
 </form>
 
@@ -194,6 +198,28 @@ Costumer service
 </div>
 
 </nav>
+<script>
+
+        function startListening() {
+
+            let recognition = new webkitSpeechRecognition();
+
+            // recognition.lang = "hi-IN";
+             recognition.lang = "en-IN";
+             // recognition.lang = "en-US";
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+
+                let result = event.results[0][0].transcript;
+
+                document.getElementById("text").value = result;
+
+            };
+        }
+
+    </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
